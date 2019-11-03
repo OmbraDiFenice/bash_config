@@ -1,4 +1,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-source $DIR/prompt.sh
-source $DIR/aliases.sh
-source $DIR/settings.sh
+
+source $DIR/bash/prompt.sh
+source $DIR/bash/aliases.sh
+source $DIR/bash/settings.sh
+
+cp $DIR/vim/vimrc ~/.vimrc
