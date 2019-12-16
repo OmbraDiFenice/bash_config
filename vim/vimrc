@@ -1,5 +1,7 @@
 set number
 set hlsearch
+set ignorecase
+set clipboard+=unnamed
 syntax on
 
 filetype plugin indent on
