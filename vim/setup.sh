@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp $DIR/vim/vimrc ~/.vimrc
+cp $INSTALL_DIR/vim/vimrc ~/.vimrc
 
 if [ ! -f ~/.vim/autoload/plug.vim ]
 then
