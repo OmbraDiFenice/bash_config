@@ -1,9 +1,8 @@
 #!/bin/bash
 
-cat >> ~/.bashrc<<EOF
-source $INSTALL_DIR/bash/prompt.sh
-source $INSTALL_DIR/bash/aliases.sh
-source $INSTALL_DIR/bash/settings.sh
-EOF
+for file in $(ls -1 *.sh | grep -v setup.sh)
+do
+    grep "$file" ~/.bashrc 2>&1> /dev/null || echo "source $INSTALL_DIR/bash/$file" >> ~/.bashrc
+done
 
 source ~/.bashrc
