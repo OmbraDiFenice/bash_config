@@ -44,3 +44,8 @@ Plug 'preservim/nerdcommenter'
 call plug#end()
 
 " ### Vim-Plug ### end
+
+" Solarized options
+syntax enable
+set background=dark
+colorscheme solarized
