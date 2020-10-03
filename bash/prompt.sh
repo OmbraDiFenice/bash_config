@@ -4,7 +4,7 @@ function parse_git_branch() {
 	if [ ! "${BRANCH}" == "" ]
 	then
 		STAT=`parse_git_dirty`
-		echo "[${BRANCH}${STAT}]"
+		echo " [${BRANCH}${STAT}]"
 	else
 		echo ""
 	fi
@@ -54,5 +54,29 @@ function parse_git_dirty() {
 	fi
 }
 
-export PS1="\[\e[34m\]\u\[\e[m\]\[\e[37m\]@\[\e[m\]\[\e[36m\]\h\[\e[m\] \[\e[33m\]\w\[\e[m\] \[\e[35m\]\`parse_git_branch\`\[\e[m\]\[\e[34m\]\`print_time\`\[\e[m\]
-\[\e[35m\]$\[\e[m\] "
+function get_exit_status() {
+    local last_exit_status="$1"
+
+    if [ $last_exit_status != "0" ]
+    then
+        echo " [${last_exit_status}]"
+    fi
+}
+
+function __prompt_command() {
+    local EXIT_STATUS=$(get_exit_status "$?") # this HAS to be the first thing done here
+    local TIME=$(print_time)
+    local GIT_STATUS=$(parse_git_branch)
+
+    local Clear='\[\e[m\]'
+    local DYellow='\[\e[33m\]'
+    local DBlue='\[\e[34m\]'
+    local Magenta='\[\e[35m\]'
+    local LBlue='\[\e[36m\]'
+    local White='\[\e[37m\]'
+
+    PS1="${DBlue}\u${White}@${LBlue}\h ${DYellow}\w${Magenta}${GIT_STATUS}${Red}${EXIT_STATUS}${DBlue}${TIME}
+${Magenta}\$${Clear} "
+}
+
+export PROMPT_COMMAND=__prompt_command
