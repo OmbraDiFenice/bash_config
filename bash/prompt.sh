@@ -55,16 +55,15 @@ function parse_git_dirty() {
 }
 
 function get_exit_status() {
-    local last_exit_status="$1"
-
-    if [ $last_exit_status != "0" ]
+    local pipe_status=${PIPESTATUS[@]}
+    if ! $(echo $pipe_status | grep -qEe '^0( 0)*$')
     then
-        echo " [${last_exit_status}]"
+        echo " [$pipe_status]"
     fi
 }
 
 function __prompt_command() {
-    local EXIT_STATUS=$(get_exit_status "$?") # this HAS to be the first thing done here
+    local EXIT_STATUS=$(get_exit_status) # this HAS to be the first thing done here
     local TIME=$(print_time)
     local GIT_STATUS=$(parse_git_branch)
 
