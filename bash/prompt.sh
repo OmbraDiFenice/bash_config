@@ -73,6 +73,7 @@ function __prompt_command() {
     local Magenta='\[\e[35m\]'
     local LBlue='\[\e[36m\]'
     local White='\[\e[37m\]'
+    local Red='\[\e[31m\]'
 
     PS1="${DBlue}\u${White}@${LBlue}\h ${DYellow}\w${Magenta}${GIT_STATUS}${Red}${EXIT_STATUS}${DBlue}${TIME}
 ${Magenta}\$${Clear} "
